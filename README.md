@@ -8,9 +8,9 @@ along with their locations in order to encode the message. We empirically show t
 - - -
 
 ## Enviroment ##
-
-- Python 3.7.6
-- PyTorch 1.2.0
+- Main requirements:
+	- Python 3.7.6
+	- PyTorch 1.2.0
 - To set it up: 
 ```javascript
 conda env create --name awt --file=environment.yml
@@ -20,23 +20,25 @@ conda env create --name awt --file=environment.yml
 ## Requirements ##
 
 - Model checkpt of InferSent:
-	- get the model infersent2.pkl from: https://github.com/facebookresearch/InferSent, place it in 'encoder' directory, or change the argument 'infersent_path' in 'main_train.py' accordingly
+	- get the model infersent2.pkl from: [InferSent](https://github.com/facebookresearch/InferSent), place it in 'encoder' directory, or change the argument 'infersent_path' in 'main_train.py' accordingly
   
-	- Download GloVe following the instructions in: https://github.com/facebookresearch/InferSent, place it in 'encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly
+	- Download GloVe following the instructions in: [inferSent](https://github.com/facebookresearch/InferSent), place it in 'encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly
   
 - Model checkpt of AWD LSTM LM:
-	- Download our trained checkpt (trained from the code in: https://github.com/salesforce/awd-lstm-lm)
+	- Download our trained checkpt (trained from the code in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm)
   
 - Model checkpt of SBERT:
-	- Follow instructions from: https://github.com/UKPLab/sentence-transformers
+	- Follow instructions from: [sentence-transformer](https://github.com/UKPLab/sentence-transformers)
 - - -
 ## Pre-trained models ##
 
-- AWD-LSTM language model: [link] (https://drive.google.com/file/d/1S2-wmZK4JgJEIFpRp1Dy4SuzTqBcLKK7/view?usp=sharing)
+- [AWD-LSTM language model](https://drive.google.com/file/d/1S2-wmZK4JgJEIFpRp1Dy4SuzTqBcLKK7/view?usp=sharing)
 
-- Full AWT (gen: [link] (https://drive.google.com/file/d/1q0OAKcHaWHkGvag5_g8tcJ5AF6G1V8s9/view?usp=sharing), disc: )
+- [Full AWT gen](https://drive.google.com/file/d/1q0OAKcHaWHkGvag5_g8tcJ5AF6G1V8s9/view?usp=sharing), [Full AWT disc](https://drive.google.com/file/d/1KiDbi3fZHNYbFwuuW19O2xuIr0e9029y/view?usp=sharing)
 
-- DAE: 
+- [DAE](https://drive.google.com/file/d/1XI2aZ-w5kMaq1MMzyAp38ruUgSo-6BXv/view?usp=sharing)
+
+- Download and place in the current directory.
 
 - - -
 ## Dataset ##
@@ -62,22 +64,28 @@ python main_train.py --msg_len 4 --data data/wikitext-2 --batch_size 80  --epoch
 ### Sampling ### 
 - selecting best sample based on SBERT:
 ```javascript
-python evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences agg. number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples]
+python evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples]
 ```
 - selecting the best sample based on LM loss:
 ```javascript
-python evaluate_sampling_lm.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences agg. number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples]
+python evaluate_sampling_lm.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples]
 ```
+- *sentences_agg_number* is the number of segments to calculate the *p*-value.
+
 ### Selective Encoding ###
 - threshold on the increase of the LM loss
 - thresholds used in the paper: 0.45, 0.5, 0.53, 0.59, 0.7 (encodes from 75% to 95% of the sentences)
+- with selective encoding, we use 1-sample
 ```javascript
 python evaluate_selective_lm_threshold.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences agg. number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --lm_threshold [threshold] --samples_num 1
 ```
-
+- For selective encoding using SBERT as a metric (sentences with higher SBERT than the threshold will not be used), use: 
+```javascript
+python evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num 1 --bert_threshold [dist_threshold]
+```
 ### Averaging ###
 ```javascript
-python evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --avg_cycle [number of sentences to avg]
+python evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --avg_cycle [number_of_sentences_to_avg]
 ```
 - - -
 
@@ -97,18 +105,31 @@ python main_train_dae.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optim
 - Evaluate the DAE on its own on clean data
 	- apply noise, denoise, then compare to the original text 
 ```javascript
-python evaluate_denoise_autoenc.py --data data/wikitext-2 --bptt 80 --autoenc_attack_path [dae model name] --use_lm_loss 1 --seed 200 --sub_prob [sub. noise prob.]
+python evaluate_denoise_autoenc.py --data data/wikitext-2 --bptt 80 --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200 --sub_prob [sub_noise_prob.]
 ```
 #### Attack ####
 - Run the attack.
 	- First sample from AWT, then input to the DAE, then decode the msg 
 ```javascript
-python evaluate_denoise_autoenc_attack_greedy.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment [sentences agg. number] --gen_path [awt model_gen]  --disc_path  [awt model_disc] --samples_num [num_samples] --autoenc_attack_path [dae model name] --use_lm_loss 1 --seed 200
+python evaluate_denoise_autoenc_attack_greedy.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path  [awt_model_disc] --samples_num [num_samples] --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200
 ```
 
 ### Random changes ###
+#### Remove ####
+```javascript
+python evaluate_remove_attacks.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path [awt_model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --remove_prob [prob_of_removing_words]
+```
+#### Replace ####
+```javascript
+python evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path [awt_model_disc] --use_lm_loss 1 --use_elmo 0 --seed 200 --samples_num [num_samples] --modify_prob [prob_of_replacing_words]
+```
 
 ### Re-watermarking ###
 - To implement this attack you need to train a second AWT model with different seed
+```javascript
+python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --disc_path [awt_model_disc_1] --gen_path2 [awt_model_gen_2] --disc_path2 [awt_model_disc_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples]
+```
+- This generates using *awt_model_gen_1*, re-watermarks with *awt_model_gen_2*, decode with *awt_model_gen_1* again.
+
 
 
