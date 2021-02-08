@@ -25,12 +25,20 @@ conda env create --name awt --file=environment.yml
 	- Download GloVe following the instructions in: https://github.com/facebookresearch/InferSent, place it in 'encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly
   
 - Model checkpt of AWD LSTM LM:
-	- Download our trained checkpt
+	- Download our trained checkpt (trained from the code in: https://github.com/salesforce/awd-lstm-lm)
   
 - Model checkpt of SBERT:
 	- Follow instructions from: https://github.com/UKPLab/sentence-transformers
 - - -
+## Pre-trained models ##
 
+- AWD-LSTM language model: [link] (https://drive.google.com/file/d/1S2-wmZK4JgJEIFpRp1Dy4SuzTqBcLKK7/view?usp=sharing)
+
+- Full AWT (gen: [link] (https://drive.google.com/file/d/1q0OAKcHaWHkGvag5_g8tcJ5AF6G1V8s9/view?usp=sharing), disc: )
+
+- DAE: 
+
+- - -
 ## Dataset ##
 
 - You will need the WikiText-2 (WT2) dataset. Follow the instructions in: https://github.com/salesforce/awd-lstm-lm to download it
