@@ -25,7 +25,7 @@ conda env create --name awt --file=environment.yml
 	- Download GloVe following the instructions in: [inferSent](https://github.com/facebookresearch/InferSent), place it in 'encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly
   
 - Model checkpt of AWD LSTM LM:
-	- Download our trained checkpt (trained from the code in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm)
+	- Download our trained checkpt (trained from the code in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm))
   
 - Model checkpt of SBERT:
 	- Follow instructions from: [sentence-transformer](https://github.com/UKPLab/sentence-transformers)
@@ -43,7 +43,7 @@ conda env create --name awt --file=environment.yml
 - - -
 ## Dataset ##
 
-- You will need the WikiText-2 (WT2) dataset. Follow the instructions in: https://github.com/salesforce/awd-lstm-lm to download it
+- You will need the WikiText-2 (WT2) dataset. Follow the instructions in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) to download it
 
 - - -
 
@@ -127,9 +127,10 @@ python evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msg
 ### Re-watermarking ###
 - To implement this attack you need to train a second AWT model with different seed
 ```javascript
-python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --disc_path [awt_model_disc_1] --gen_path2 [awt_model_gen_2] --disc_path2 [awt_model_disc_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples]
+python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --gen_path2 [awt_model_gen_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --samples_num_adv [num_samples]
 ```
 - This generates using *awt_model_gen_1*, re-watermarks with *awt_model_gen_2*, decode with *awt_model_gen_1* again.
+- *samples_num_adv* is the number of samples sampled by *awt_model_gen_2*
 
 
 
