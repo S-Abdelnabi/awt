@@ -70,7 +70,7 @@ python evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --
 ```javascript
 python evaluate_sampling_lm.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number]  --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples]
 ```
-- *sentences_agg_number* is the number of segments to calculate the *p*-value.
+- *sentences_agg_number* is the number of segments to accumulate to calculate the *p*-value
 
 ### Selective Encoding ###
 - threshold on the increase of the LM loss
@@ -84,6 +84,7 @@ python evaluate_selective_lm_threshold.py --msg_len 4 --data data/wikitext-2 --b
 python evaluate_sampling_bert.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num 1 --bert_threshold [dist_threshold]
 ```
 ### Averaging ###
+- Encode multiple sentences with the same message, decode the msg from each one, average the posterior probabilities 
 ```javascript
 python evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [model_gen] --disc_path [model_disc] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --avg_cycle [number_of_sentences_to_avg]
 ```
@@ -98,8 +99,8 @@ python evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [
 ```javascript
 python main_train_dae.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optimizer adam --save model1 --batch_size 64 --epochs 2000 --dropoute 0.05 --sub_prob 0.1
 ```
-- sub_prob: prob. of substuiting words. 
-- dropoute: embedding dropout prob. 
+- *sub_prob*: prob. of substuiting words during training
+- *dropoute*: embedding dropout prob 
 
 #### Evaluate ####
 - Evaluate the DAE on its own on clean data
@@ -108,7 +109,7 @@ python main_train_dae.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optim
 python evaluate_denoise_autoenc.py --data data/wikitext-2 --bptt 80 --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200 --sub_prob [sub_noise_prob.]
 ```
 #### Attack ####
-- Run the attack.
+- Run the attack:
 	- First sample from AWT, then input to the DAE, then decode the msg 
 ```javascript
 python evaluate_denoise_autoenc_attack_greedy.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen]  --disc_path  [awt_model_disc] --samples_num [num_samples] --autoenc_attack_path [dae_model_name] --use_lm_loss 1 --seed 200
@@ -125,11 +126,11 @@ python evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msg
 ```
 
 ### Re-watermarking ###
-- To implement this attack you need to train a second AWT model with different seed
+- To implement this attack you need to train a second AWT model with different seed:
 ```javascript
 python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --gen_path2 [awt_model_gen_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --samples_num_adv [num_samples]
 ```
-- This generates using *awt_model_gen_1*, re-watermarks with *awt_model_gen_2*, decode with *awt_model_gen_1* again.
+- This generates using *awt_model_gen_1*, re-watermarks with *awt_model_gen_2*, decode with *awt_model_gen_1* again
 - *samples_num_adv* is the number of samples sampled by *awt_model_gen_2*
 
 
