@@ -178,7 +178,7 @@ python evaluate_disc.py --data data/wikitext-2 --bptt 80 --disc_path [classifier
 
 ## Acknowledgement ##
 
-- We thank the authors of [InferSent](https://github.com/facebookresearch/InferSent), [sentence-transformer](https://github.com/UKPLab/sentence-transformers), and [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) for their repositories. We acknowledge [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) as we use their dataset and parts of our code were modified from theirs. 
+- We thank the authors of [InferSent](https://github.com/facebookresearch/InferSent), [sentence-transformer](https://github.com/UKPLab/sentence-transformers), and [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) for their repositories and pre-trained models which we use in our training and experiments. We acknowledge [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) as we use their dataset and parts of our code were modified from theirs. 
 
 - - -
 
