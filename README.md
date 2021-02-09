@@ -5,6 +5,8 @@ Code for the paper: Adversarial Watermarking Transformer: Towards Tracing Text P
 Recent advances in natural language generation have introduced powerful language models with high-quality output text. However, this raises concerns about the potential misuse of such models for malicious purposes. In this paper, we study natural language watermarking as a defense to help better mark and trace the provenance of text. We introduce the Adversarial Watermarking Transformer (AWT) with a jointly trained encoder-decoder and adversarial training that, given an input text and a binary message, generates an output text that is unobtrusively encoded with the given message. We further study different training and inference strategies to achieve minimal changes to the semantics and correctness of the input text. AWT is the first end-to-end model to hide data in text by automatically learning -without ground truth- word substitutions
 along with their locations in order to encode the message. We empirically show that our model is effective in largely preserving text utility and decoding the watermark while hiding its presence against adversaries. Additionally, we demonstrate that our method is robust against a range of attacks.
 
+![alt text](https://github.com/S-Abdelnabi/awt/blob/main/fig.PNG?raw=true)
+
 - - -
 
 ## Enviroment ##
@@ -134,5 +136,21 @@ python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --m
 - *samples_num_adv* is the number of samples sampled by *awt_model_gen_2*, we use 1 sample in the paper
 
 - - -
+
+## Evaluating Secrecy ##
+To run the classification on the full AWT output.
+
+### Classifier training ###
+- First, you need to generate watermarked training, test, and validation data. The data we used to run the experiment on the full AWT model can be found already under 'data_classifier' (20 samples with LM metric). For other sampling conditions, you need to generate new data using the previous scripts.
+
+- To train the classifier in the paper use: 
+```javascript
+python main_disc.py --data data/wikitext-2 --batch_size 64  --epochs 800 --save WT2_classifier --optimizer adam --fixed_length 0 --bptt 80 --dropout_transformer 0.3 --encoding_layers 3 --classifier transformer --ratio 1
+```
+- To evaluate the classifier (on the generated data used before), use: 
+```javascript
+python evaluate_disc.py --data data/wikitext-2 --bptt 80 --disc_path [classifier_name] --seed 200  
+```
+
 
 
