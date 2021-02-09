@@ -63,7 +63,7 @@ python main_train.py --msg_len 4 --data data/wikitext-2 --batch_size 80  --epoch
 ```
 - - -
 
-## Evaluating effectivness ##
+## Evaluating Effectiveness ##
 - Needs the checkpoints in the current directory 
 
 ### Sampling ### 
@@ -104,7 +104,7 @@ python evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [
 ```javascript
 python main_train_dae.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optimizer adam --save model1 --batch_size 64 --epochs 2000 --dropoute 0.05 --sub_prob 0.1
 ```
-- *sub_prob*: prob. of substuiting words during training
+- *sub_prob*: prob. of substituting words during training
 - *dropoute*: embedding dropout prob 
 
 #### Evaluate ####
@@ -148,12 +148,39 @@ To run the classification on the full AWT output.
 
 - To train the classifier in the paper use: 
 ```javascript
-python main_disc.py --data data/wikitext-2 --batch_size 64  --epochs 800 --save WT2_classifier --optimizer adam --fixed_length 0 --bptt 80 --dropout_transformer 0.3 --encoding_layers 3 --classifier transformer --ratio 1
+python main_disc.py --data data/wikitext-2 --batch_size 64  --epochs 300 --save WT2_classifier --optimizer adam --fixed_length 0 --bptt 80 --dropout_transformer 0.3 --encoding_layers 3 --classifier transformer --ratio 1
 ```
 - To evaluate the classifier (on the generated data used before), use: 
 ```javascript
 python evaluate_disc.py --data data/wikitext-2 --bptt 80 --disc_path [classifier_name] --seed 200  
 ```
+
+- - -
+## Visualization ##
+
+- The code to reproduce the visualization experiments (histogram counts, words change map count, top changed words)
+- You will need to install *wordcloud* for the words maps
+- Follow the notebook files, the needed files of AWT output and the *no discriminator* output can be found under 'visualization/'
+
+- - -
+## Citation ##
+
+- If you find this code helpful, please cite our paper:
+```javascript
+@article{abdelnabi2020adversarial,
+  title={Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding},
+  author={Abdelnabi, Sahar and Fritz, Mario},
+  journal={arXiv preprint arXiv:2009.03015},
+  year={2020}
+}
+```
+- - -
+
+## Acknowledgement ##
+
+- We thank the authors of [InferSent](https://github.com/facebookresearch/InferSent), [sentence-transformer](https://github.com/UKPLab/sentence-transformers), and [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) for their repositories. We acknowledge [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm) as we use their dataset and parts of our code were modified from theirs. 
+
+- - -
 
 
 
