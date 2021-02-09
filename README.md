@@ -131,7 +131,8 @@ python evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msg
 python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --gen_path2 [awt_model_gen_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --samples_num_adv [num_samples]
 ```
 - This generates using *awt_model_gen_1*, re-watermarks with *awt_model_gen_2*, decode with *awt_model_gen_1* again
-- *samples_num_adv* is the number of samples sampled by *awt_model_gen_2*
+- *samples_num_adv* is the number of samples sampled by *awt_model_gen_2*, we use 1 sample in the paper
 
+- - -
 
 
