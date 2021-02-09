@@ -1,1 +1,3 @@
-code for training, effectiveness and robustness evaluation
+- code for training, effectiveness, secrecy, and robustness evaluation
+- need to have all checkpoints available. Check the documentation for more information
+- The classifier training requires the data under 'data_classifier'
