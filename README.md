@@ -40,6 +40,9 @@ conda env create --name awt --file=environment.yml
 
 - [DAE](https://drive.google.com/file/d/1XI2aZ-w5kMaq1MMzyAp38ruUgSo-6BXv/view?usp=sharing)
 
+- [Classifier](https://drive.google.com/file/d/1tLBT08YxVFnEzQxhhmtA1sbFWLraOgBe/view?usp=sharing)
+	- A transformer-based classifier trained on the full AWT output (20 samples)
+
 - Download and place in the current directory.
 
 - - -
