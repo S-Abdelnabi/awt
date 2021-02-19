@@ -1,5 +1,6 @@
 # Adversarial Watermarking Transformer (AWT) #
-Code for the paper: Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding
+- Code for the paper: [Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding](https://arxiv.org/pdf/2009.03015.pdf) 
+- Authors: [Sahar Abdelnabi](https://scholar.google.de/citations?user=QEiYbDYAAAAJ&hl=en), [Mario Fritz](https://cispa.saarland/group/fritz/)
 
 ## Abstract ## 
 Recent advances in natural language generation have introduced powerful language models with high-quality output text. However, this raises concerns about the potential misuse of such models for malicious purposes. In this paper, we study natural language watermarking as a defense to help better mark and trace the provenance of text. We introduce the Adversarial Watermarking Transformer (AWT) with a jointly trained encoder-decoder and adversarial training that, given an input text and a binary message, generates an output text that is unobtrusively encoded with the given message. We further study different training and inference strategies to achieve minimal changes to the semantics and correctness of the input text. AWT is the first end-to-end model to hide data in text by automatically learning -without ground truth- word substitutions
@@ -35,13 +36,15 @@ conda env create --name awt --file=environment.yml
 ## Pre-trained models ##
 
 - [AWD-LSTM language model](https://drive.google.com/file/d/1S2-wmZK4JgJEIFpRp1Dy4SuzTqBcLKK7/view?usp=sharing)
+	- Trained with the fine-tuning step and reaches a comparable perplexity to what was reproted in the [AWD-LSTM paper](https://arxiv.org/pdf/1708.02182.pdf)
 
 - [Full AWT gen](https://drive.google.com/file/d/1q0OAKcHaWHkGvag5_g8tcJ5AF6G1V8s9/view?usp=sharing), [Full AWT disc](https://drive.google.com/file/d/1KiDbi3fZHNYbFwuuW19O2xuIr0e9029y/view?usp=sharing)
 
 - [DAE](https://drive.google.com/file/d/1XI2aZ-w5kMaq1MMzyAp38ruUgSo-6BXv/view?usp=sharing)
+	- DAE trained to denoise non-watermarked text (the noise applied is word replacement and word removing) 
 
 - [Classifier](https://drive.google.com/file/d/1tLBT08YxVFnEzQxhhmtA1sbFWLraOgBe/view?usp=sharing)
-	- A transformer-based classifier trained on the full AWT output (20 samples)
+	- A transformer-based classifier trained on the full AWT output (20 samples), tasked to classify between watermarked and non-watermarked text 
 
 - Download and place in the current directory.
 
