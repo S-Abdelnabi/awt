@@ -147,12 +147,14 @@ python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --m
 To run the classification on the full AWT output.
 
 ### Classifier training ###
-- First, you need to generate watermarked training, test, and validation data. The data we used to run the experiment on the full AWT model can be found already under 'data_classifier' (20 samples with LM metric). For other sampling conditions, you need to generate new data using the previous scripts.
+- First, you need to generate watermarked training, test, and validation data. The data we used to run the experiment on the full AWT model can be found already under 'data_classifier' (20 samples with LM metric). For other sampling conditions, you need to generate new data using the previous scripts. 
 
 - To train the classifier in the paper use: 
 ```javascript
 python main_disc.py --data data/wikitext-2 --batch_size 64  --epochs 300 --save WT2_classifier --optimizer adam --fixed_length 0 --bptt 80 --dropout_transformer 0.3 --encoding_layers 3 --classifier transformer --ratio 1
 ```
+where '--data' takes the directory containing the training data (found in 'data_classifier')
+
 - To evaluate the classifier (on the generated data used before), use: 
 ```javascript
 python evaluate_disc.py --data data/wikitext-2 --bptt 80 --disc_path [classifier_name] --seed 200  
