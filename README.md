@@ -134,13 +134,17 @@ python evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msg
 ```
 
 ### Re-watermarking ###
-- To implement this attack you need to train a second AWT model with different seed:
+- To implement this attack you need to train a second AWT model with different seed (see our checkpoints - this second model is comparable in performance generally to the first one but it might have more obvious artifacts because it was not trained to convergence, as we used it mainly for attacks not for utility evaluation)
 ```javascript
 python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --gen_path2 [awt_model_gen_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --samples_num_adv [num_samples]
 ```
 - This generates using *awt_model_gen_1*, re-watermarks with *awt_model_gen_2*, decode with *awt_model_gen_1* again
 - *samples_num_adv* is the number of samples sampled by *awt_model_gen_2*, we use 1 sample in the paper
 
+### De-watermarking ###
+- To implement this attack you need to train a second AWT model with a different seed (see our checkpoints)
+- You then need to train a denoisining autoencoder on input and output pairs of the second de-watermarking model (the data is in under: 'data_dae_pairs')
+- Then you need to apply the denoising autoencoder to the first model 
 - - -
 
 ## Evaluating Secrecy ##
