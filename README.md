@@ -134,7 +134,7 @@ python evaluate_syn_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msg
 ```
 
 ### Re-watermarking ###
-- To implement this attack you need to train a second AWT model with different seed (see our checkpoints - this second model is comparable in performance generally to the first one but it might have more obvious artifacts because it was not trained to convergence, as we used it mainly for attacks not for utility evaluation)
+- To implement this attack you need to train a second AWT model with different seed (see our checkpoints)
 ```javascript
 python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --msgs_segment [sentences_agg_number] --gen_path [awt_model_gen_1] --gen_path2 [awt_model_gen_2] --use_lm_loss 1 --seed 200 --samples_num [num_samples] --samples_num_adv [num_samples]
 ```
