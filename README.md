@@ -144,7 +144,14 @@ python rewatermarking_attack.py --msg_len 4 --data data/wikitext-2 --bptt 80 --m
 ### De-watermarking ###
 - To implement this attack you need to train a second AWT model with a different seed (see our checkpoints)
 - You then need to train a denoisining autoencoder on input and output pairs of the second de-watermarking model (the data is in under: 'data_dae_pairs')
-- Then you need to apply the denoising autoencoder to the first model 
+```javascript
+python main_train_dae_wm_pairs.py --data data/wikitext-2 --bptt 80 --pos_drop 0.1 --optimizer adam --save model2 --batch_size 64 --epochs 500 --dropoute 0.05
+```
+where '--data' takes the directory containing the training data (found in 'data_classifier')
+- Then you need to apply the denoising autoencoder to the first model (or the second model: <img src="https://render.githubusercontent.com/render/math?math=AWT_\text{adv}">, in case of the white-box setting).
+```javascript
+python evaluate_dewatermarking_attack.py --data data/wikitext-2 --bptt 80 --msg_len 4 --msgs_segment  [sentences_agg_number] --gen_path [awt_model_gen_1]  --disc_path  [awt_model_disc_1] --samples_num 1 --autoenc_attack_path [dae_paired_model_path] --use_lm_loss 1 --seed 200 
+```
 - - -
 
 ## Evaluating Secrecy ##
