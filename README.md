@@ -43,6 +43,9 @@ conda env create --name awt --file=environment.yml
 - [DAE](https://drive.google.com/file/d/1XI2aZ-w5kMaq1MMzyAp38ruUgSo-6BXv/view?usp=sharing)
 	- DAE trained to denoise non-watermarked text (the noise applied is word replacement and word removing) 
 
+- [paired DAE](https://drive.google.com/file/d/1zhzyi1S0w7PcFxp0ECw7L1RiTZHNfASp/view?usp=sharing)
+	- DAE trained to denoise the watermarked text of <img src="https://render.githubusercontent.com/render/math?math=AWT_\text{adv}">
+
 - [Classifier](https://drive.google.com/file/d/1tLBT08YxVFnEzQxhhmtA1sbFWLraOgBe/view?usp=sharing)
 	- A transformer-based classifier trained on the full AWT output (20 samples), tasked to classify between watermarked and non-watermarked text 
 
