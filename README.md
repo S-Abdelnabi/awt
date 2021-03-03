@@ -42,6 +42,9 @@ conda env create --name awt --file=environment.yml
 
 - [DAE](https://drive.google.com/file/d/1XI2aZ-w5kMaq1MMzyAp38ruUgSo-6BXv/view?usp=sharing)
 	- DAE trained to denoise non-watermarked text (the noise applied is word replacement and word removing) 
+	
+- [<img src="https://render.githubusercontent.com/render/math?math=AWT_\text{adv}\_gen">](https://drive.google.com/file/d/1_gwJ-V8a-B3c8ZbR0g_JhWVcWkk8BP-8/view?usp=sharing), [<img src="https://render.githubusercontent.com/render/math?math=AWT_\text{adv}\_disc">](https://drive.google.com/file/d/1hnPsQ1oSIdpMQNTcXO9nDp2SsZqHkId1/view?usp=sharing) 
+	- Another trained model (used for attacks)
 
 - [paired DAE](https://drive.google.com/file/d/1zhzyi1S0w7PcFxp0ECw7L1RiTZHNfASp/view?usp=sharing)
 	- DAE trained to denoise the watermarked text of <img src="https://render.githubusercontent.com/render/math?math=AWT_\text{adv}">
