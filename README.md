@@ -107,6 +107,7 @@ python evaluate_avg.py --msg_len 4 --data data/wikitext-2 --bptt 80 --gen_path [
 ## Evaluating Robustness ##
 
 ### DAE ###
+![alt text](https://github.com/S-Abdelnabi/awt/blob/main/denoise.png?raw=true)
 
 #### Training ####
 - To train the denosining-autoencoder as in the paper:
