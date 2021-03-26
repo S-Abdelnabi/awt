@@ -23,9 +23,9 @@ conda env create --name awt --file=environment.yml
 ## Requirements ##
 
 - Model checkpt of InferSent:
-	- get the model infersent2.pkl from: [InferSent](https://github.com/facebookresearch/InferSent), place it in 'encoder' directory, or change the argument 'infersent_path' in 'main_train.py' accordingly
+	- get the model infersent2.pkl from: [InferSent](https://github.com/facebookresearch/InferSent), place it in 'sent_encoder' directory, or change the argument 'infersent_path' in 'main_train.py' accordingly
   
-	- Download GloVe following the instructions in: [inferSent](https://github.com/facebookresearch/InferSent), place it in 'encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly
+	- Download GloVe following the instructions in: [inferSent](https://github.com/facebookresearch/InferSent), place it in 'sent_encoder/GloVe' directory, or change the argument 'glove_path' in 'main_train.py' accordingly
   
 - Model checkpt of AWD LSTM LM:
 	- Download our trained checkpt (trained from the code in: [AWD-LSTM](https://github.com/salesforce/awd-lstm-lm))
