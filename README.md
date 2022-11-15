@@ -191,9 +191,9 @@ python evaluate_disc.py --data data/wikitext-2 --bptt 80 --disc_path [classifier
 
 - If you find this code helpful, please cite our paper:
 ```javascript
-@inproceedings{abdelnabi2020adversarial,
+@inproceedings{abdelnabi21oakland,
     title = {Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding},
-    author = {Abdelnabi, Sahar and Fritz, Mario},
+    author = {Sahar Abdelnabi and Mario Fritz},
     booktitle = {42nd IEEE Symposium on Security and Privacy},
     year = {2021}
 }
